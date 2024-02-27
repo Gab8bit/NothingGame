@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nothing</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: "Segoe UI", sans-serif;
+            text-align: center;
+        }
+        
+        h1 {
+            margin-top: 20%;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #tip{
+            color: #494949;
+            visibility: hidden;
+        }
+        
+        span.nulla {
+            color: #808080;
+        }
+    </style>
+    <script>
+        var startTime = 0;
+        var interval;
+        var game = false;
+      
+        document.addEventListener("keydown", function() {
+            if(!game){
+                game = true;
+                startTime = Date.now();
+                interval = setInterval(function() {
+                    document.getElementById("h1").innerHTML = "Non stai facendo nulla da <span class='nulla'>" + parseInt((Date.now() - startTime) / 1000) + "</span> secondi";
+                }, 1000);
+                document.getElementById("tip").style.visibility = "hidden";
+            }else{
+                game = false;
+                clearInterval(interval);
+                var elapsedTime = parseInt((Date.now() - startTime) / 1000);
+                document.getElementById("h1").innerHTML = "Hai fatto qualcosa!<br>Hai resistito per <span class='nulla'>" + elapsedTime + "</span> secondi";
+                document.getElementById("tip").style.visibility = "visible";
+            }
+        });
+      
+        document.addEventListener("mousemove", function() {
+            if(game){
+                game = false;
+                clearInterval(interval);
+                var elapsedTime = parseInt((Date.now() - startTime) / 1000);
+                document.getElementById("h1").innerHTML = "Hai fatto qualcosa!<br>Hai resistito per <span class='nulla'>" + elapsedTime + "</span> secondi";
+                document.getElementById("tip").style.visibility = "visible";
+            }
+        });
+      </script>
+      
+</head>
+<body>
+    <h1 id="h1">Premi un tasto per iniziare a non fare <span class="nulla">nulla</span></h1>
+    <br>
+    <br>
+    <h3 id="tip">Consiglio: Non toccare nulla</h3>
+</body>
+</html>
